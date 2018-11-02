@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import map from 'lodash.map'
+import map from 'lodash.map';
 
 class EpisodesList extends Component {
   state = {
@@ -10,7 +10,8 @@ class EpisodesList extends Component {
       <div>
         {map(this.state.episodes, (episode, i) => {
           return <div key={i}>
-            <h1>{episode.title}</h1>
+            <img src={episode.image_url} alt="episode"/>
+            <h3>{episode.title}</h3>
           </div>
         })}
       </div>
