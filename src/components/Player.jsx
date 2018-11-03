@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { setInterval } from 'timers';
 
 class Player extends Component {
   state = {
-    playing: false
+    percent: ''
   }
   render() {
     return (
@@ -15,16 +16,29 @@ class Player extends Component {
           <i className="fas fa-step-forward"></i>
           </div>
           <div className='progress'>
-            <div className='progress_filled'>
+            <div style={{ flexBasis: this.state.percent}} className='progress_filled'>
             </div>
           </div>
         </div>
       </div>
     )
   }
+  componentDidMount() {
+    setInterval(_ => this.progressUpdate(), 1000)
+  }
 
   togglePlay = () => {
     this.props.playing ? this.props.pause() : this.props.play()
+  }
+
+  progressUpdate = () => {
+    if(this.props.playing) {
+      const audioDurInSec = this.props.episode.duration / 1000
+      const percent = (this.props.audio.currentTime / audioDurInSec) * 100
+      this.setState({
+        percent: `${percent}%`
+      })
+    }
   }
 }
 
