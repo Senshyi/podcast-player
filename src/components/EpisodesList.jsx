@@ -10,7 +10,7 @@ class EpisodesList extends Component {
       <div>
         {map(this.props.episodes, (episode, i) => {
           return <div key={i}>
-            <img onClick={() => this.props.selectEpisode(episode)} src={episode.image_url} alt="episode"/>
+            <img onClick={() => this.props.selectEpisode(episode, i)} src={episode.image_url} alt="episode"/>
             <h3>{episode.title}</h3>
           </div>
         })}
