@@ -18,7 +18,7 @@ class Player extends Component {
           </div>
           <div className='player-progress'>
               <span className='currentTime'>{this.state.currentTime}</span>
-            <div className='progress'>
+            <div onClick={this.scrub} className='progress'>
               <div style={{ flexBasis: this.state.percent}} className='progress_filled'>
               </div>
             </div>
@@ -36,6 +36,11 @@ class Player extends Component {
 
   togglePlay = () => {
     this.props.playing ? this.props.pause() : this.props.play()
+  }
+
+  scrub = (e) => {
+    console.log(e.nativeEvent.offsetX, e.target.offsetWidth)
+    this.props.audio.currentTime = (e.nativeEvent.offsetX / e.target.offsetWidth) * (this.props.episode.duration / 1000)
   }
 
   progressUpdate = () => {
