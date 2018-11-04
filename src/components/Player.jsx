@@ -12,9 +12,9 @@ class Player extends Component {
         <div className='player-center'>
           <p>{this.props.episode.title}</p>
           <div className='player-controller'>
-            <i className="fas fa-step-backward"></i>
+            <i onClick={this.props.previous} className="fas fa-step-backward"></i>
             <i onClick={this.togglePlay} className={this.props.playing ? "far fa-pause-circle" : "far fa-play-circle"}></i>
-            <i className="fas fa-step-forward"></i>
+            <i onClick={this.props.next} className="fas fa-step-forward"></i>
           </div>
           <div className='player-progress'>
               <span className='currentTime'>{this.state.currentTime}</span>
@@ -39,7 +39,6 @@ class Player extends Component {
   }
 
   scrub = (e) => {
-    console.log(e.nativeEvent.offsetX, e.target.offsetWidth)
     this.props.audio.currentTime = (e.nativeEvent.offsetX / e.target.offsetWidth) * (this.props.episode.duration / 1000)
   }
 
