@@ -3,12 +3,14 @@ import './App.css';
 import Navbar from './components/Navbar';
 import EpisodesList from './components/EpisodesList';
 import Player from './components/Player';
+import * as api from './api'
 
 class App extends Component {
   state = {
     playing: false,
     episodes: {},
-    currentlyPlaying: {}
+    currentlyPlaying: {},
+    episodeIndex: 0
   }
   render() {
     return (
@@ -16,14 +18,13 @@ class App extends Component {
         {Object.keys(this.state.currentlyPlaying).length !== 0 && <audio ref='audio' src={`https://api.spreaker.com/v2/episodes/${this.state.currentlyPlaying.episode_id}/play`}></audio>}
         <Navbar />
         <EpisodesList episodes={this.state.episodes} selectEpisode={this.selectEpisode} />
-        <Player episode={this.state.currentlyPlaying} playing={this.state.playing} play={this.play} pause={this.pause} audio={this.refs.audio}/>
+        <Player episode={this.state.currentlyPlaying} playing={this.state.playing} play={this.play} pause={this.pause} audio={this.refs.audio} next={this.nextEpisode} previous={this.previousEpisode}/>
       </div>
     );
   }
 
   componentDidMount() {
-    fetch('https://api.spreaker.com/v2/shows/1433865/episodes')
-      .then(buffer => buffer.json())
+    api.fetchEpisodes()
       .then(({ response: { items } }) => {
         this.setState({
           episodes: items
@@ -31,12 +32,13 @@ class App extends Component {
       })
   }
 
-  selectEpisode = (episode) => {
+  selectEpisode = (episode, i) => {
     if (episode.episode_id === this.state.currentlyPlaying.episode_id) {
       this.state.playing ? this.pause() : this.play()
     } else {
       this.setState({
         currentlyPlaying: episode,
+        episodeIndex: i
       }, _ => this.play())
     }
   }
@@ -51,6 +53,20 @@ class App extends Component {
     this.setState({
       playing: true
     })
+  }
+
+  nextEpisode = () => {
+    this.setState({
+      currentlyPlaying: this.state.episodes[this.state.episodeIndex + 1],
+      episodeIndex: this.state.episodeIndex + 1
+    },_ => this.play())
+  }
+
+  previousEpisode = () => {
+    this.setState({
+      currentlyPlaying: this.state.episodes[this.state.episodeIndex - 1],
+      episodeIndex: this.state.episodeIndex - 1
+    }, _ => this.play())
   }
 }
 
