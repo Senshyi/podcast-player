@@ -22,7 +22,7 @@ class App extends Component {
         <Navbar filter={this.filterEpisodes}/>
         <Route path='/episodes/:episode_id' render={({match}) =><EpisodeCard match={match} /> } />
         <Route exact path='/' render={({ match }) => <EpisodesList match={match} episodes={this.state.filteredEp.length ? this.state.filteredEp : this.state.episodes} selectEpisode={this.selectEpisode} 
-          index={this.state.episodeIndex} playing={this.state.playing}/>} />
+          index={this.state.episodeIndex} playing={this.state.playing} setEpisode={this.setEpisode}/> } />
         <Player episode={this.state.currentlyPlaying} playing={this.state.playing} play={this.play} pause={this.pause} audio={this.refs.audio} next={this.nextEpisode} previous={this.previousEpisode}/>
       </div>
     );
@@ -53,6 +53,13 @@ class App extends Component {
         episodeIndex: i
       }, _ => this.play())
     }
+  }
+
+  setEpisode = (episode, i) => {
+    this.setState({
+      currentlyPlaying: episode,
+      episodeIndex: i
+    })
   }
   pause = () => {
     this.refs.audio.pause();

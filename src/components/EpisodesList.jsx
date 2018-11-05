@@ -16,7 +16,7 @@ class EpisodesList extends Component {
               <img src={episode.image_url} alt="episode"/>
             </div>
             <Link to={`/episodes/${episode.episode_id}`}>
-              <h3>{episode.title}</h3>
+              <h3 onClick={() => this.props.setEpisode(episode, i)}>{episode.title}</h3>
             </Link>
             <p>Show Duration: {this.formatTime(episode.duration / 1000)}</p>
           </div>
