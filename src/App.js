@@ -77,17 +77,21 @@ class App extends Component {
   }
 
   nextEpisode = () => {
-    this.setState({
-      currentlyPlaying: this.state.episodes[this.state.episodeIndex + 1],
-      episodeIndex: this.state.episodeIndex + 1
-    },_ => this.play())
+    if (Object.keys(this.state.currentlyPlaying).length) {
+      this.setState({
+        currentlyPlaying: this.state.episodes[this.state.episodeIndex + 1],
+        episodeIndex: this.state.episodeIndex + 1
+      },_ => this.play())
+    }
   }
 
   previousEpisode = () => {
-    this.setState({
-      currentlyPlaying: this.state.episodes[this.state.episodeIndex - 1],
-      episodeIndex: this.state.episodeIndex - 1
-    }, _ => this.play())
+    if (Object.keys(this.state.currentlyPlaying).length) {
+      this.setState({
+        currentlyPlaying: this.state.episodes[this.state.episodeIndex - 1],
+        episodeIndex: this.state.episodeIndex - 1
+      }, _ => this.play())
+    }
   }
 }
 
