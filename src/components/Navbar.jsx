@@ -8,7 +8,7 @@ class Navbar extends Component {
     return (
       <div className='navbar'>
         <div className='logo'>
-          <i class="fas fa-microphone"></i>
+          <i className="fas fa-microphone"></i>
           <h1>Podcast</h1>
         </div>
         <input onChange={this.handelInput} value={this.state.input} type="text" placeholder='Search Episode' />
