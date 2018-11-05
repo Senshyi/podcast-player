@@ -18,7 +18,7 @@ class EpisodesList extends Component {
             <Link to={`/episodes/${episode.episode_id}`}>
               <h3>{episode.title}</h3>
             </Link>
-            <p>Show Duration: {this.formatTime(episode.duration)}</p>
+            <p>Show Duration: {this.formatTime(episode.duration / 1000)}</p>
           </div>
         })}
       </div>
