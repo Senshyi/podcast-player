@@ -32,6 +32,7 @@ class Player extends Component {
         </div>
 
         <div className='player-right'>
+          <i className="fas fa-volume-up"></i>
           <input onChange={this.volumeChange} type='range' name='volume' min='0' max='1' step='0.05'/>
         </div>
       </div>
@@ -52,8 +53,8 @@ class Player extends Component {
   progressUpdate = () => {
     if(this.props.playing) {
       const audioDurInSec = this.props.episode.duration / 1000
-      const percent = Math.floor((this.props.audio.currentTime / audioDurInSec) * 100)
-      if(percent === 100) this.props.next()
+      const percent = (this.props.audio.currentTime / audioDurInSec) * 100
+      if(Math.floor(percent) === 100) this.props.next()
       this.setState({
         percent: `${percent}%`,
         currentTime: this.formatTime(this.props.audio.currentTime)
