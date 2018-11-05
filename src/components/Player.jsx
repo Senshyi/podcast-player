@@ -43,7 +43,9 @@ class Player extends Component {
   }
 
   togglePlay = () => {
-    this.props.playing ? this.props.pause() : this.props.play()
+    if(Object.keys(this.props.episode).length) {
+      this.props.playing ? this.props.pause() : this.props.play()
+    }
   }
 
   scrub = (e) => {
