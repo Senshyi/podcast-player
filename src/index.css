@@ -19,6 +19,10 @@ i {
   width: 40%;
 }
 
+.player-center i {
+  cursor: pointer;
+}
+
 .player-center p {
   color: rgba(244, 241, 241, 0.831);
   height: 18px;
@@ -58,7 +62,11 @@ i {
 
 .player-right i {
   font-size: 22px;
-  color: rgb(70, 69, 69)
+  color: rgb(70, 69, 69);
+}
+
+.player-right input {
+  cursor: pointer;
 }
 
 .progress {
@@ -91,7 +99,7 @@ i {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 90%;
+  width: 95%;
 }
 
 .episodes-list p {
@@ -146,6 +154,7 @@ i {
 }
 
 .navbar input {
+  align-self: center;
   height: 25px;
   padding-left: 10px;
   font-size: 15px;
