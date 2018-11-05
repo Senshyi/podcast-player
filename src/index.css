@@ -83,19 +83,32 @@ i {
 .episodes-list {
   margin: auto;
   margin-top: 50px;
+  margin-bottom: 8%;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  width: 80%;
+  width: 90%;
+}
+
+.episodes-list p {
+  margin-top: 8px;
+  color: rgba(172, 171, 171, 0.831)
 }
 
 .episode {
   text-align: center;
   width: 30%;
+  margin-bottom: 25px; 
+}
+
+.episode a{
+  text-decoration: none;
+  color: rgba(244, 241, 241, 0.831)
 }
 
 .thumbnail {
   position: relative;
+  margin-bottom: 15px;
 }
 
 .thumbnail i {
