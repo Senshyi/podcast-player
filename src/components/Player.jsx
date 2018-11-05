@@ -27,6 +27,10 @@ class Player extends Component {
             </span>
           </div>
         </div>
+
+        <div className='player-right'>
+          <input onChange={this.volumeChange} type='range' name='volume' min='0' max='1' step='0.05'/>
+        </div>
       </div>
     )
   }
@@ -58,6 +62,10 @@ class Player extends Component {
     const sec = parseInt(seconds % 60);
     const min = parseInt((seconds / 60) % 60);
     return `${min}:${sec < 10 ? '0' + sec : sec}`
+  }
+
+  volumeChange = (e) => {
+    this.props.audio.volume = e.target.value
   }
 }
 
