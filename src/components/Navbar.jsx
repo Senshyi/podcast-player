@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
 
 class Navbar extends Component {
   state = {
@@ -7,10 +8,12 @@ class Navbar extends Component {
   render() {
     return (
       <div className='navbar'>
+      <Link to='/'>
         <div className='logo'>
           <i className="fas fa-microphone"></i>
           <h1>Podcast</h1>
         </div>
+      </Link>
         <input onChange={this.handelInput} value={this.state.input} type="text" placeholder='Search Episode' />
       </div>
     );
