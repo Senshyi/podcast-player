@@ -12,16 +12,23 @@ class EpisodesList extends Component {
         {map(this.props.episodes, (episode, i) => {
           return <div className='episode' key={i}>
             <div onClick={() => this.props.selectEpisode(episode, i)} className='thumbnail'>
-            <i onClick={this.togglePlay} className={this.props.playing && this.props.index === i ? "far fa-pause-circle" : "far fa-play-circle"}></i>
-            <img src={episode.image_url} alt="episode"/>
-          </div>
+              <i onClick={this.togglePlay} className={this.props.playing && this.props.index === i ? "far fa-pause-circle" : "far fa-play-circle"}></i>
+              <img src={episode.image_url} alt="episode"/>
+            </div>
             <Link to={`/episodes/${episode.episode_id}`}>
               <h3>{episode.title}</h3>
             </Link>
+            <p>Show Duration: {this.formatTime(episode.duration)}</p>
           </div>
         })}
       </div>
     );
+  }
+
+  formatTime = (seconds) => {
+    const sec = parseInt(seconds % 60);
+    const min = parseInt((seconds / 60) % 60);
+    return `${min}:${sec < 10 ? '0' + sec : sec}`
   }
 }
 
