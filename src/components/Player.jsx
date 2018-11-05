@@ -45,7 +45,8 @@ class Player extends Component {
   progressUpdate = () => {
     if(this.props.playing) {
       const audioDurInSec = this.props.episode.duration / 1000
-      const percent = (this.props.audio.currentTime / audioDurInSec) * 100
+      const percent = Math.floor((this.props.audio.currentTime / audioDurInSec) * 100)
+      if(percent === 100) this.props.next()
       this.setState({
         percent: `${percent}%`,
         currentTime: this.formatTime(this.props.audio.currentTime)
