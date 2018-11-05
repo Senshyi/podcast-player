@@ -9,6 +9,9 @@ class Player extends Component {
   render() {
     return (
       <div className='player'>
+      <div className='player-left'>
+        {Object.keys(this.props.episode).length > 0 && <img src={this.props.episode.image_url} alt='cover'/>}
+      </div>
         <div className='player-center'>
           <p>{this.props.episode.title}</p>
           <div className='player-controller'>
