@@ -125,3 +125,28 @@ i {
 .player-progress span {
   color: rgba(244, 241, 241, 0.831);
 }
+
+.navbar {
+  margin: 10px 20px;
+  display: flex;
+  justify-content: space-between
+}
+
+.navbar i {
+  font-size: 60px;
+}
+
+.navbar input {
+  height: 25px;
+  padding-left: 10px;
+  font-size: 15px;
+}
+
+.logo {
+  display: flex;
+  color: #fff
+}
+
+.logo h1 {
+  align-self: center;
+}

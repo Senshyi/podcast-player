@@ -6,17 +6,20 @@ class Navbar extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Podcast</h1>
-        <input onChange={this.handelInput} type="text" />
+      <div className='navbar'>
+        <div className='logo'>
+          <i class="fas fa-microphone"></i>
+          <h1>Podcast</h1>
+        </div>
+        <input onChange={this.handelInput} value={this.state.input} type="text" placeholder='Search Episode' />
       </div>
     );
   }
 
   handelInput = (e) => {
     this.setState({
-      textInput: e.target.value
-    }, _ => this.props.filter(this.state.textInput))
+      input: e.target.value
+    }, _ => this.props.filter(this.state.input))
   }
 }
 
