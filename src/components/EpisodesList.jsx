@@ -11,8 +11,8 @@ class EpisodesList extends Component {
       <div className='episodes-list'>
         {map(this.props.episodes, (episode, i) => {
           return <div className='episode' key={i}>
-            <div onClick={() => this.props.selectEpisode(episode, i)} className='thumbnail'>
-              <i onClick={this.togglePlay} className={this.props.playing && this.props.index === i ? "far fa-pause-circle" : "far fa-play-circle"}></i>
+            <div  className='thumbnail'>
+              <i onClick={() => this.props.selectEpisode(episode, i)} className={this.props.playing && this.props.index === i ? "far fa-pause-circle" : "far fa-play-circle"}></i>
               <img src={episode.image_url} alt="episode"/>
             </div>
             <Link to={`/episodes/${episode.episode_id}`}>
