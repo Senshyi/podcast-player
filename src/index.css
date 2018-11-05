@@ -11,11 +11,11 @@ i {
   height: 100px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .player-center {
-  margin: 0 10%;
+  /* margin: 0 10%; */
   width: 40%;
 }
 
@@ -39,17 +39,21 @@ i {
 }
 .player-left {
   align-self: center;
-  width: 100px;
+  width: 30%;
   height: 90%
 }
 
 .player-left img{
-  width: 100%;
+  width: 100px;
   height: 100%;
+  margin-left: 10px; 
 }
 
 .player-right {
+  width: 28%;
+  text-align: right;
   align-self: center;
+  padding-right: 2%;
 }
 
 .player-right i {
@@ -120,6 +124,7 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .player-progress span {
