@@ -3,7 +3,9 @@ import './App.css';
 import Navbar from './components/Navbar';
 import EpisodesList from './components/EpisodesList';
 import Player from './components/Player';
+import EpisodeCard from './components/EpisodeCard';
 import * as api from './api'
+import { Route } from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -17,7 +19,8 @@ class App extends Component {
       <div className="App">
         {Object.keys(this.state.currentlyPlaying).length !== 0 && <audio ref='audio' src={`https://api.spreaker.com/v2/episodes/${this.state.currentlyPlaying.episode_id}/play`}></audio>}
         <Navbar />
-        <EpisodesList episodes={this.state.episodes} selectEpisode={this.selectEpisode} />
+        <Route path='/episodes/:episode_id' render={({match}) =><EpisodeCard match={match} /> } />
+        <Route exact path='/' render={({match}) =><EpisodesList match={match} episodes={this.state.episodes} selectEpisode={this.selectEpisode} />} />
         <Player episode={this.state.currentlyPlaying} playing={this.state.playing} play={this.play} pause={this.pause} audio={this.refs.audio} next={this.nextEpisode} previous={this.previousEpisode}/>
       </div>
     );
