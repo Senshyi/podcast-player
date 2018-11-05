@@ -44,3 +44,17 @@ i {
 .description {
   white-space: pre-wrap;
 }
+
+.episodes-list {
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 80%;
+}
+
+.episode {
+  text-align: center;
+  width: 30%;
+}
