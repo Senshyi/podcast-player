@@ -32,7 +32,9 @@ class App extends Component {
     api.fetchEpisodes()
       .then(({ response: { items } }) => {
         this.setState({
-          episodes: items
+          episodes: items.sort((a, b) => {
+            return a.published_at > b.published_at ? -1 : 1
+          })
         })
       })
   }
