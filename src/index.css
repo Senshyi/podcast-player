@@ -137,6 +137,10 @@ i {
   justify-content: space-between
 }
 
+.navbar a {
+  text-decoration: none;
+}
+
 .navbar i {
   font-size: 60px;
 }
