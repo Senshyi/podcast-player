@@ -20,6 +20,10 @@ i {
 }
 
 .player-center p {
+  color: rgba(244, 241, 241, 0.831);
+  height: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   text-align: center
 }
 
@@ -29,6 +33,7 @@ i {
 }
 
 .player-controller {
+  color: rgba(145, 145, 145, 0.53);
   text-align: center;
   margin: 7px
 }
@@ -47,7 +52,13 @@ i {
   align-self: center;
 }
 
+.player-right i {
+  font-size: 22px;
+  color: rgb(70, 69, 69)
+}
+
 .progress {
+  margin: 0 5px;
   flex: 10;
   position: relative;
   display: flex;
@@ -96,4 +107,8 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.player-progress span {
+  color: rgba(244, 241, 241, 0.831);
 }
