@@ -155,3 +155,22 @@ i {
 .logo h1 {
   align-self: center;
 }
+
+.episode-card {
+  margin: 5% 5% 10% 5%;
+  color: #fff
+}
+
+.episode-card img {
+  margin-bottom: 30px;
+  margin-right: 20px
+}
+
+.episode-card header {
+  display: flex;
+}
+
+.header-right p {
+  margin: 10px 0;
+  font-style: italic;
+}
