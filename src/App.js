@@ -10,7 +10,8 @@ import { Route } from 'react-router-dom';
 class App extends Component {
   state = {
     playing: false,
-    episodes: {},
+    episodes: [],
+    filteredEp: [],
     currentlyPlaying: {},
     episodeIndex: 0
   }
@@ -18,9 +19,9 @@ class App extends Component {
     return (
       <div className="App">
         {Object.keys(this.state.currentlyPlaying).length !== 0 && <audio ref='audio' src={`https://api.spreaker.com/v2/episodes/${this.state.currentlyPlaying.episode_id}/play`}></audio>}
-        <Navbar />
+        <Navbar filter={this.filterEpisodes}/>
         <Route path='/episodes/:episode_id' render={({match}) =><EpisodeCard match={match} /> } />
-        <Route exact path='/' render={({ match }) => <EpisodesList match={match} episodes={this.state.episodes} selectEpisode={this.selectEpisode} 
+        <Route exact path='/' render={({ match }) => <EpisodesList match={match} episodes={this.state.filteredEp.length ? this.state.filteredEp : this.state.episodes} selectEpisode={this.selectEpisode} 
           index={this.state.episodeIndex} playing={this.state.playing}/>} />
         <Player episode={this.state.currentlyPlaying} playing={this.state.playing} play={this.play} pause={this.pause} audio={this.refs.audio} next={this.nextEpisode} previous={this.previousEpisode}/>
       </div>
@@ -34,6 +35,13 @@ class App extends Component {
           episodes: items
         })
       })
+  }
+
+  filterEpisodes = (title) => {
+    const filteredEp = this.state.episodes.filter(ep => ep.title.includes(title))
+    this.setState({
+      filteredEp
+    })
   }
 
   selectEpisode = (episode, i) => {
