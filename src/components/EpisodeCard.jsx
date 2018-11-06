@@ -29,7 +29,6 @@ class EpisodeCard extends Component {
   componentDidMount() {
     api.fetchSingleEpisode(this.props.match.params.episode_id)
       .then(({response: {episode}}) => {
-        console.log(episode.author.fullname)
         this.setState({
           episode
         })
