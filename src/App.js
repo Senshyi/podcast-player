@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   filterEpisodes = (title) => {
-    const filteredEp = this.state.episodes.filter(ep => ep.title.includes(title))
+    const filteredEp = this.state.episodes.filter(ep => ep.title.toLowerCase().includes(title.toLowerCase()))
     this.setState({
       filteredEp
     })
