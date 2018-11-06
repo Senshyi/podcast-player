@@ -27,7 +27,7 @@ describe("EpisodesList", () => {
     component.find("i").simulate("click");
     expect(clickFn).toHaveBeenCalled();
   });
-  it("clik on title link to episode details scene", () => {
+  it("click on title link to episode details scene", () => {
     const component = shallow(
       <EpisodesList
         episodes={[{ title: "Podcast show", episode_id: "123456" }]}
