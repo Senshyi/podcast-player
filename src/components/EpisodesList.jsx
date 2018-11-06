@@ -2,17 +2,17 @@ import React from "react";
 import map from "lodash.map";
 import { Link } from "react-router-dom";
 
-const EpisodesList = props => {
+const EpisodesList = ({ episodes, selectEpisode, playing, index }) => {
   return (
     <div className="episodes-list">
-      {map(props.episodes, (episode, i) => {
+      {map(episodes, (episode, i) => {
         return (
           <div className="episode" key={i}>
             <div className="thumbnail">
               <i
-                onClick={() => props.selectEpisode(episode, i)}
+                onClick={() => selectEpisode(episode, i)}
                 className={
-                  props.playing && props.index === i
+                  playing && index === i
                     ? "far fa-pause-circle"
                     : "far fa-play-circle"
                 }
