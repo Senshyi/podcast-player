@@ -20,9 +20,9 @@ class App extends Component {
       <div className="App">
         {Object.keys(this.state.currentlyPlaying).length !== 0 && <audio ref='audio' src={`https://api.spreaker.com/v2/episodes/${this.state.currentlyPlaying.episode_id}/play`}></audio>}
         <Navbar filter={this.filterEpisodes}/>
-        <Route path='/episodes/:episode_id' render={({match}) =><EpisodeCard match={match} /> } />
+        <Route path='/episodes/:episode_id' render={({match}) =><EpisodeCard match={match}  /> } />
         <Route exact path='/' render={({ match }) => <EpisodesList match={match} episodes={this.state.filteredEp.length ? this.state.filteredEp : this.state.episodes} selectEpisode={this.selectEpisode} 
-          index={this.state.episodeIndex} playing={this.state.playing} setEpisode={this.setEpisode}/> } />
+          index={this.state.episodeIndex} playing={this.state.playing} /> } />
         <Player episode={this.state.currentlyPlaying} playing={this.state.playing} play={this.play} pause={this.pause} audio={this.refs.audio} next={this.nextEpisode} previous={this.previousEpisode}/>
       </div>
     );
@@ -57,12 +57,6 @@ class App extends Component {
     }
   }
 
-  setEpisode = (episode, i) => {
-    this.setState({
-      currentlyPlaying: episode,
-      episodeIndex: i
-    })
-  }
   pause = () => {
     this.refs.audio.pause();
     this.setState({
