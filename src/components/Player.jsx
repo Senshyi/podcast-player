@@ -64,19 +64,21 @@ class Player extends Component {
   };
 
   scrub = e => {
-    this.props.audio.currentTime =
+    const { audio, episode } = this.props;
+    audio.currentTime =
       (e.nativeEvent.offsetX / e.target.offsetWidth) *
-      (this.props.episode.duration / 1000);
+      (episode.duration / 1000);
   };
 
   progressUpdate = () => {
-    if (this.props.playing) {
-      const audioDurInSec = this.props.episode.duration / 1000;
-      const percent = (this.props.audio.currentTime / audioDurInSec) * 100;
-      if (Math.floor(percent) === 100) this.props.next();
+    const { playing, episode, audio, next } = this.props;
+    if (playing) {
+      const audioDurInSec = episode.duration / 1000;
+      const percent = (audio.currentTime / audioDurInSec) * 100;
+      if (Math.floor(percent) === 100) next();
       this.setState({
         percent: `${percent}%`,
-        currentTime: this.formatTime(this.props.audio.currentTime)
+        currentTime: this.formatTime(audio.currentTime)
       });
     }
   };
