@@ -1,78 +1,100 @@
-import React, { Component } from 'react';
-import { setInterval } from 'timers';
+import React, { Component } from "react";
+import { setInterval } from "timers";
 
 class Player extends Component {
   state = {
-    currentTime: '0:00',
-    percent: ''
-  }
+    currentTime: "0:00",
+    percent: ""
+  };
   render() {
     return (
-      <div className='player'>
-      <div className='player-left'>
-        {Object.keys(this.props.episode).length > 0 && <img src={this.props.episode.image_url} alt='cover'/>}
-      </div>
-        <div className='player-center'>
+      <div className="player">
+        <div className="player-left">
+          {Object.keys(this.props.episode).length > 0 && (
+            <img src={this.props.episode.image_url} alt="cover" />
+          )}
+        </div>
+        <div className="player-center">
           <p>{this.props.episode.title}</p>
-          <div className='player-controller'>
-            <i onClick={this.props.previous} className="fas fa-step-backward"></i>
-            <i onClick={this.togglePlay} className={this.props.playing ? "far fa-pause-circle" : "far fa-play-circle"}></i>
-            <i onClick={this.props.next} className="fas fa-step-forward"></i>
+          <div className="player-controller">
+            <i onClick={this.props.previous} className="fas fa-step-backward" />
+            <i
+              onClick={this.togglePlay}
+              className={
+                this.props.playing
+                  ? "far fa-pause-circle"
+                  : "far fa-play-circle"
+              }
+            />
+            <i onClick={this.props.next} className="fas fa-step-forward" />
           </div>
-          <div className='player-progress'>
-              <span className='currentTime'>{this.state.currentTime}</span>
-            <div onClick={this.scrub} className='progress'>
-              <div style={{ flexBasis: this.state.percent}} className='progress_filled'>
-              </div>
+          <div className="player-progress">
+            <span className="currentTime">{this.state.currentTime}</span>
+            <div onClick={this.scrub} className="progress">
+              <div
+                style={{ flexBasis: this.state.percent }}
+                className="progress_filled"
+              />
             </div>
-            <span className='duration'>
-              {Object.keys(this.props.episode).length ? this.formatTime(this.props.episode.duration / 1000) : '0:00'}
+            <span className="duration">
+              {Object.keys(this.props.episode).length
+                ? this.formatTime(this.props.episode.duration / 1000)
+                : "0:00"}
             </span>
           </div>
         </div>
 
-        <div className='player-right'>
-          <i className="fas fa-volume-up"></i>
-          <input onChange={this.volumeChange} type='range' name='volume' min='0' max='1' step='0.05'/>
+        <div className="player-right">
+          <i className="fas fa-volume-up" />
+          <input
+            onChange={this.volumeChange}
+            type="range"
+            name="volume"
+            min="0"
+            max="1"
+            step="0.05"
+          />
         </div>
       </div>
-    )
+    );
   }
   componentDidMount() {
-    setInterval(_ => this.progressUpdate(), 1000)
+    setInterval(_ => this.progressUpdate(), 1000);
   }
 
   togglePlay = () => {
-    if(Object.keys(this.props.episode).length) {
-      this.props.playing ? this.props.pause() : this.props.play()
+    if (Object.keys(this.props.episode).length) {
+      this.props.playing ? this.props.pause() : this.props.play();
     }
-  }
+  };
 
-  scrub = (e) => {
-    this.props.audio.currentTime = (e.nativeEvent.offsetX / e.target.offsetWidth) * (this.props.episode.duration / 1000)
-  }
+  scrub = e => {
+    this.props.audio.currentTime =
+      (e.nativeEvent.offsetX / e.target.offsetWidth) *
+      (this.props.episode.duration / 1000);
+  };
 
   progressUpdate = () => {
-    if(this.props.playing) {
-      const audioDurInSec = this.props.episode.duration / 1000
-      const percent = (this.props.audio.currentTime / audioDurInSec) * 100
-      if(Math.floor(percent) === 100) this.props.next()
+    if (this.props.playing) {
+      const audioDurInSec = this.props.episode.duration / 1000;
+      const percent = (this.props.audio.currentTime / audioDurInSec) * 100;
+      if (Math.floor(percent) === 100) this.props.next();
       this.setState({
         percent: `${percent}%`,
         currentTime: this.formatTime(this.props.audio.currentTime)
-      })
+      });
     }
-  }
+  };
 
-  formatTime = (seconds) => {
+  formatTime = seconds => {
     const sec = parseInt(seconds % 60);
     const min = parseInt((seconds / 60) % 60);
-    return `${min}:${sec < 10 ? '0' + sec : sec}`
-  }
+    return `${min}:${sec < 10 ? "0" + sec : sec}`;
+  };
 
-  volumeChange = (e) => {
-    this.props.audio.volume = e.target.value
-  }
+  volumeChange = e => {
+    this.props.audio.volume = e.target.value;
+  };
 }
 
 export default Player;
