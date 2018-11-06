@@ -6,35 +6,33 @@ class EpisodeCard extends Component {
     episode: {}
   };
   render() {
+    const { episode } = this.state;
     return (
       <div className="episode-card">
         <header>
-          <img src={this.state.episode.image_url} alt="" />
-          {Object.keys(this.state.episode).length !== 0 ? (
+          <img src={episode.image_url} alt="" />
+          {Object.keys(episode).length !== 0 ? (
             <div className="header-right">
-              <h2>{this.state.episode.title}</h2>
-              <p>Author: {this.state.episode.author.fullname}</p>
-              <p>Pusblished at: {this.state.episode.published_at}</p>
+              <h2>{episode.title}</h2>
+              <p>Author: {episode.author.fullname}</p>
+              <p>Pusblished at: {episode.published_at}</p>
             </div>
           ) : (
             ""
           )}
         </header>
         <div className="description">
-          <p>{this.state.episode.description}</p>
+          <p>{episode.description}</p>
         </div>
       </div>
     );
   }
 
   componentDidMount() {
-    api
-      .fetchSingleEpisode(this.props.match.params.episode_id)
-      .then(({ response: { episode } }) => {
-        this.setState({
-          episode
-        });
-      });
+    const { episode_id } = this.props.match.params;
+    api.fetchSingleEpisode(episode_id).then(({ response: { episode } }) => {
+      this.setState({ episode });
+    });
   }
 }
 
