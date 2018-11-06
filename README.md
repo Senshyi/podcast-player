@@ -1,11 +1,12 @@
 # podcast-player
-[Podcast](https://objective-kowalevski-2de920.netlify.com/) is a SPA that:
+[Podcast](https://objective-kowalevski-2de920.netlify.com/) is a SPA that presente user with a list of podcast episodes.
 
-  - show a lost of all available episodes
-  - ability to play/select from list of episodes
+#### features
+  - show a list of all available episodes
+  - ability to play/select from a list of episodes
   - show Play/Pause button
   - ability to play next or previous episode
-  - by clicking on title show details about episode
+  - by clicking on title show details about the particular episode
   - when an episode ends the next one start
   - display a progress bar which updates in real time
   - show volume slider
