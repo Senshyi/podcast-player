@@ -7,38 +7,33 @@ class Player extends Component {
     percent: ""
   };
   render() {
+    const { episode, previous, next, playing } = this.props;
+    const { currentTime, percent } = this.state;
     return (
       <div className="player">
         <div className="player-left">
-          {Object.keys(this.props.episode).length > 0 && (
-            <img src={this.props.episode.image_url} alt="cover" />
+          {Object.keys(episode).length > 0 && (
+            <img src={episode.image_url} alt="cover" />
           )}
         </div>
         <div className="player-center">
-          <p>{this.props.episode.title}</p>
+          <p>{episode.title}</p>
           <div className="player-controller">
-            <i onClick={this.props.previous} className="fas fa-step-backward" />
+            <i onClick={previous} className="fas fa-step-backward" />
             <i
               onClick={this.togglePlay}
-              className={
-                this.props.playing
-                  ? "far fa-pause-circle"
-                  : "far fa-play-circle"
-              }
+              className={playing ? "far fa-pause-circle" : "far fa-play-circle"}
             />
-            <i onClick={this.props.next} className="fas fa-step-forward" />
+            <i onClick={next} className="fas fa-step-forward" />
           </div>
           <div className="player-progress">
-            <span className="currentTime">{this.state.currentTime}</span>
+            <span className="currentTime">{currentTime}</span>
             <div onClick={this.scrub} className="progress">
-              <div
-                style={{ flexBasis: this.state.percent }}
-                className="progress_filled"
-              />
+              <div style={{ flexBasis: percent }} className="progress_filled" />
             </div>
             <span className="duration">
-              {Object.keys(this.props.episode).length
-                ? this.formatTime(this.props.episode.duration / 1000)
+              {Object.keys(episode).length
+                ? this.formatTime(episode.duration / 1000)
                 : "0:00"}
             </span>
           </div>
