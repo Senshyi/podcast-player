@@ -16,13 +16,20 @@ class App extends Component {
     episodeIndex: 0
   };
   render() {
+    const {
+      playing,
+      episodes,
+      filteredEp,
+      currentlyPlaying,
+      episodeIndex
+    } = this.state;
     return (
       <div className="App">
-        {Object.keys(this.state.currentlyPlaying).length !== 0 && (
+        {Object.keys(currentlyPlaying).length !== 0 && (
           <audio
             ref="audio"
             src={`https://api.spreaker.com/v2/episodes/${
-              this.state.currentlyPlaying.episode_id
+              currentlyPlaying.episode_id
             }/play`}
           />
         )}
@@ -37,20 +44,16 @@ class App extends Component {
           render={({ match }) => (
             <EpisodesList
               match={match}
-              episodes={
-                this.state.filteredEp.length
-                  ? this.state.filteredEp
-                  : this.state.episodes
-              }
+              episodes={filteredEp.length ? filteredEp : episodes}
               selectEpisode={this.selectEpisode}
-              index={this.state.episodeIndex}
-              playing={this.state.playing}
+              index={episodeIndex}
+              playing={playing}
             />
           )}
         />
         <Player
-          episode={this.state.currentlyPlaying}
-          playing={this.state.playing}
+          episode={currentlyPlaying}
+          playing={playing}
           play={this.play}
           pause={this.pause}
           audio={this.refs.audio}
@@ -72,7 +75,8 @@ class App extends Component {
   }
 
   filterEpisodes = title => {
-    const filteredEp = this.state.episodes.filter(ep =>
+    const { episodes } = this.state;
+    const filteredEp = episodes.filter(ep =>
       ep.title.toLowerCase().includes(title.toLowerCase())
     );
     this.setState({
@@ -81,8 +85,9 @@ class App extends Component {
   };
 
   selectEpisode = (episode, i) => {
-    if (episode.episode_id === this.state.currentlyPlaying.episode_id) {
-      this.state.playing ? this.pause() : this.play();
+    const { currentlyPlaying, playing } = this.state;
+    if (episode.episode_id === currentlyPlaying.episode_id) {
+      playing ? this.pause() : this.play();
     } else {
       this.setState(
         {
@@ -108,11 +113,12 @@ class App extends Component {
   };
 
   nextEpisode = () => {
-    if (Object.keys(this.state.currentlyPlaying).length) {
+    const { currentlyPlaying, episodes, episodeIndex } = this.state;
+    if (Object.keys(currentlyPlaying).length) {
       this.setState(
         {
-          currentlyPlaying: this.state.episodes[this.state.episodeIndex + 1],
-          episodeIndex: this.state.episodeIndex + 1
+          currentlyPlaying: episodes[episodeIndex + 1],
+          episodeIndex: episodeIndex + 1
         },
         _ => this.play()
       );
@@ -120,11 +126,12 @@ class App extends Component {
   };
 
   previousEpisode = () => {
-    if (Object.keys(this.state.currentlyPlaying).length) {
+    const { currentlyPlaying, episodes, episodeIndex } = this.state;
+    if (Object.keys(currentlyPlaying).length) {
       this.setState(
         {
-          currentlyPlaying: this.state.episodes[this.state.episodeIndex - 1],
-          episodeIndex: this.state.episodeIndex - 1
+          currentlyPlaying: episodes[episodeIndex - 1],
+          episodeIndex: episodeIndex - 1
         },
         _ => this.play()
       );
